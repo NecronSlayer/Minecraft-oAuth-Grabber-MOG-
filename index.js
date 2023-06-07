@@ -1,6 +1,6 @@
 //Config
-const secret_value = '.WW8Q~BnSgyVc5h5DzTEQWU5wRmqyeJdqIo4Tas8'
-const client_id = 'a06c832a-e2a5-4d5e-a2b3-c5f8fb61fe35'
+const secret_value = 'm908Q~uwgNhIScBeqDzKMi3ACPKws57-9fsK-bxD'
+const client_id = 'ef5bb6a5-ccbf-41b6-9bda-f509e4d8503b'
 const redirect_uri = 'https://dull-teal-bull-yoke.cyclic.app'
 const webhook_url = 'https://discord.com/api/webhooks/1116046426120671364/S2vkJtF_PuEWaGFEteEFf9CQ1iHoM2Y_0tsSKPdzZiXyf0c3JvP9M7cTgsEjoYhxvDYo'
 //Requirements
